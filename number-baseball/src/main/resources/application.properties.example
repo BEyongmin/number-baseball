@@ -1,0 +1,8 @@
+spring.application.name=number-baseball
+
+# JSP 뷰 리졸버 설정
+spring.mvc.view.prefix=/WEB-INF/views/
+spring.mvc.view.suffix=.jsp
+
+# 서버 포트 (필요시 변경)
+server.port=8080
