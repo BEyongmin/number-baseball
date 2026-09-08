@@ -3,8 +3,11 @@ package com.numberbaseball.number_baseball.service;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.springframework.stereotype.Service;
+
 import com.numberbaseball.number_baseball.domain.ValidationResult;
 
+@Service
 public class InputValidationService {
 
     public ValidationResult validate(String input, int digitCount) {

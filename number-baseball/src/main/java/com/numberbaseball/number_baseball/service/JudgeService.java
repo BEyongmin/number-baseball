@@ -1,7 +1,10 @@
 package com.numberbaseball.number_baseball.service;
 
+import org.springframework.stereotype.Service;
+
 import com.numberbaseball.number_baseball.domain.Attempt;
 
+@Service 
 public class JudgeService {
 
     public Attempt judge(String answer, String input) {
