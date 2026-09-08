@@ -1,16 +1,18 @@
 package com.numberbaseball.number_baseball.service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
+import com.numberbaseball.number_baseball.domain.Attempt;
 import com.numberbaseball.number_baseball.domain.ValidationResult;
 
 @Service
 public class InputValidationService {
 
-    public ValidationResult validate(String input, int digitCount) {
+    public ValidationResult validate(String input, int digitCount, List<Attempt> history) {
 
         if (input == null || input.isBlank()) {
             return ValidationResult.fail("숫자를 입력해주세요.");
@@ -31,7 +33,11 @@ public class InputValidationService {
         if (uniqueChars.size() != digitCount) {
             return ValidationResult.fail("중복되지 않는 숫자를 입력해주세요.");
         }
-
+        for (Attempt attempt : history) {
+            if (attempt.getInput().equals(input)) {
+                return ValidationResult.fail("이미 시도한 숫자예요.");
+            }
+        }
         return ValidationResult.ok();
     }
 }

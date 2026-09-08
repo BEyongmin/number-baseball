@@ -4,25 +4,44 @@
 <html>
 <head>
     <title>숫자야구 게임 - 결과</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/game.css">
 </head>
 <body>
+    <div class="card">
+        <div class="stadium-header">
+            <h1>Number Baseball</h1>
+            <p>정답을 추리하는 숫자 야구</p>
+        </div>
+        <div class="stitch"></div>
 
-    <c:choose>
-        <c:when test="${game.status == 'WON'}">
-            <h1>게임 성공!</h1>
-            <p>정답: ${game.answer}</p>
-            <p>${game.attemptCount}번 만에 성공했습니다.</p>
-        </c:when>
-        <c:otherwise>
-            <h1>게임 종료</h1>
-            <p>정답: ${game.answer}</p>
-            <p>${game.attemptLimit}번의 기회를 모두 사용했습니다.</p>
-        </c:otherwise>
-    </c:choose>
+        <div class="result-content">
 
-    <form action="/start" method="get">
-        <button type="submit">새 게임</button>
-    </form>
+            <c:choose>
+                <c:when test="${game.status == 'WON'}">
+                    <span class="result-badge result-badge--won">WIN</span>
+                    <h2 class="result-title">게임 성공!</h2>
+                    <p class="result-stat">${game.attemptCount}번 만에 성공했습니다.</p>
+                </c:when>
+                <c:otherwise>
+                    <span class="result-badge result-badge--lost">GAME OVER</span>
+                    <h2 class="result-title">게임 종료</h2>
+                    <p class="result-stat">${game.attemptLimit}번의 기회를 모두 사용했습니다.</p>
+                </c:otherwise>
+            </c:choose>
 
+            <div class="result-answer-box">
+                <p class="result-answer-label">정답</p>
+                <p class="result-answer-digits">${game.answer}</p>
+            </div>
+
+            <form action="/start" method="get">
+                <button type="submit" class="btn-primary">새 게임</button>
+            </form>
+
+        </div>
+    </div>
 </body>
 </html>

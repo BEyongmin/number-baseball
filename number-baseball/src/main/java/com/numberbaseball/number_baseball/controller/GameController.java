@@ -52,6 +52,11 @@ public class GameController {
         return "redirect:/game";
     }
 
+    @GetMapping("/")
+    public String root() {
+        return "redirect:/game";
+    }
+
     @GetMapping("/game")
     public String gamePage(HttpSession session, Model model) {
         Game game = (Game) session.getAttribute("game");
@@ -83,7 +88,7 @@ public class GameController {
         }
 
         ValidationResult validationResult =
-                inputValidationService.validate(input, game.getDigitCount());
+                inputValidationService.validate(input, game.getDigitCount(), game.getHistory());
 
         if (!validationResult.isValid()) {
             redirectAttributes.addFlashAttribute("errorMessage", validationResult.getErrorMessage());
@@ -104,6 +109,12 @@ public class GameController {
         }
 
         return "redirect:/game";
+    }
+
+    @PostMapping("/game/reset")
+    public String resetGame(HttpSession session) {
+        session.removeAttribute("game");
+        return "redirect:/start";
     }
 
     @GetMapping("/result")
