@@ -27,6 +27,29 @@
         <button type="submit">확인</button>
     </form>
 
+    <c:if test="${game.difficulty == 'BEGINNER'}">
+        <p>숫자 상태 (초보 모드)</p>
+        <div>
+            <c:forEach begin="0" end="9" var="digit">
+                <c:set var="status" value="${digitStatuses[digit]}" />
+                <c:choose>
+                    <c:when test="${status == 'STRIKE'}">
+                        <span style="display:inline-block; width:30px; padding:5px; margin:2px; text-align:center; background-color:red; color:white;">${digit}</span>
+                    </c:when>
+                    <c:when test="${status == 'BALL'}">
+                        <span style="display:inline-block; width:30px; padding:5px; margin:2px; text-align:center; background-color:yellow;">${digit}</span>
+                    </c:when>
+                    <c:when test="${status == 'OUT'}">
+                        <span style="display:inline-block; width:30px; padding:5px; margin:2px; text-align:center; background-color:lightgray;">${digit}</span>
+                    </c:when>
+                    <c:otherwise>
+                        <span style="display:inline-block; width:30px; padding:5px; margin:2px; text-align:center; background-color:white; border:1px solid black;">${digit}</span>
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+        </div>
+    </c:if>
+
     <hr>
 
     <table border="1">

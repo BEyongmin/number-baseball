@@ -1,5 +1,7 @@
 package com.numberbaseball.number_baseball.controller;
 
+import java.util.Map;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,9 +11,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.numberbaseball.number_baseball.domain.Attempt;
 import com.numberbaseball.number_baseball.domain.Difficulty;
+import com.numberbaseball.number_baseball.domain.DigitStatus;
 import com.numberbaseball.number_baseball.domain.Game;
 import com.numberbaseball.number_baseball.domain.GameStatus;
 import com.numberbaseball.number_baseball.domain.ValidationResult;
+import com.numberbaseball.number_baseball.service.DigitStatusService;
 import com.numberbaseball.number_baseball.service.InputValidationService;
 import com.numberbaseball.number_baseball.service.JudgeService;
 import com.numberbaseball.number_baseball.service.NumberGeneratorService;
@@ -26,6 +30,7 @@ public class GameController {
     private final NumberGeneratorService numberGeneratorService;
     private final InputValidationService inputValidationService;
     private final JudgeService judgeService;
+    private final DigitStatusService digitStatusService;
 
     @GetMapping("/start")
     public String startPage() {
@@ -56,6 +61,12 @@ public class GameController {
         }
 
         model.addAttribute("game", game);
+
+        if (game.getDifficulty() == Difficulty.BEGINNER) {
+            Map<Integer, DigitStatus> digitStatuses = digitStatusService.computeStatuses(game);
+            model.addAttribute("digitStatuses", digitStatuses);
+        }
+
         return "game";
     }
 
