@@ -65,6 +65,11 @@ public class GameController {
             return "redirect:/start";
         }
 
+        if (game.getStatus() != GameStatus.PLAYING) {
+            return "redirect:/result";
+        }
+
+
         model.addAttribute("game", game);
 
         if (game.getDifficulty() == Difficulty.BEGINNER) {
@@ -85,6 +90,15 @@ public class GameController {
 
         if (game == null) {
             return "redirect:/start";
+        }
+
+        if (game.getStatus() != GameStatus.PLAYING) {
+            redirectAttributes.addFlashAttribute("staleGameMessage", "이미 끝난 게임입니다.");
+            return "redirect:/result";
+        }
+
+        if (game.getStatus() != GameStatus.PLAYING) {
+            return "redirect:/result";
         }
 
         ValidationResult validationResult =
@@ -123,6 +137,10 @@ public class GameController {
 
         if (game == null) {
             return "redirect:/start";
+        }
+
+        if (game.getStatus() == GameStatus.PLAYING) {
+            return "redirect:/game";
         }
 
         model.addAttribute("game", game);

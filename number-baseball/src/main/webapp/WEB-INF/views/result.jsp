@@ -19,6 +19,10 @@
 
         <div class="result-content">
 
+            <c:if test="${not empty staleGameMessage}">
+                <p class="stale-notice">${staleGameMessage}</p>
+            </c:if>
+
             <c:choose>
                 <c:when test="${game.status == 'WON'}">
                     <span class="result-badge result-badge--won">WIN</span>
