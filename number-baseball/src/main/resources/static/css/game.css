@@ -21,7 +21,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    padding-top: 40px;
+    padding: 24px 12px;
 }
 
 .card {
@@ -29,7 +29,8 @@ body {
     border-radius: 4px;
     overflow: hidden;
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
-    width: 420px;
+    width: 100%;
+    max-width: 480px;
 }
 
 .stadium-header {
@@ -423,4 +424,29 @@ body {
 
 .legend-dot--out {
     background: #b8b0a0;
+}
+
+.stale-notice {
+    background: #fbe4e2;
+    border: 2px solid var(--scarlet);
+    color: var(--scarlet);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 10px 14px;
+    border-radius: 4px;
+    margin: 0 0 20px;
+}
+
+@media (min-width: 900px) {
+    .card {
+        max-width: 560px;
+    }
+
+    .stadium-header h1 {
+        font-size: 24px;
+    }
+
+    .guess-input {
+        font-size: 20px;
+    }
 }
